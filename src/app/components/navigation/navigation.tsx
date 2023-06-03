@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './navbar';
 
 export interface NavigationKey {
@@ -12,13 +12,26 @@ export interface NavigationKey {
 const Navigation = ({
     children,
     keys,
-    defaultKeyId
+    defaultKeyId,
+    onChange
 }: {
     keys: NavigationKey[];
     children: React.ReactNode;
     defaultKeyId: string;
+    onChange?(key: NavigationKey): any;
 }) => {
     const [activeKeyId, setActiveKeyId] = useState<string>(defaultKeyId);
+
+    useEffect(
+        () =>
+            onChange &&
+            onChange(keys.find(key => key.id === activeKeyId) as NavigationKey),
+        [activeKeyId, onChange, keys]
+    );
+
+    useEffect(() => {
+        setActiveKeyId(defaultKeyId);
+    }, [defaultKeyId]);
 
     return (
         <>

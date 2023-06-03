@@ -6,21 +6,20 @@ import NavPanel from './components/navigation/navpanel';
 import Clock from './components/panels/clock';
 import SettingsPanel, { Settings } from './components/panels/settings-panel';
 import Stopwatch from './components/panels/stopwatch';
+import Timer from './components/panels/timer';
+import Head from 'next/head';
 
 const Home = () => {
-    const [settings, setSettings] = useState<Settings>((() => {
-        let result: string | Settings;
+    const [settings, setSettings] = useState<Settings>({
+        defaultTab: 'clock',
+        use24: true
+    });
 
-        if ((result = localStorage.getItem('settings') as string))
-            result = JSON.parse(result);
-        else
-            result = {
-                use24: true,
-                defaultTab: 'clock'
-            } as Settings;
+    const [title, setTitle] = useState(settings.defaultTab);
 
-        return result;
-    }) as () => Settings);
+    useEffect(() => {
+        document.title = title;
+    }, [title]);
 
     useEffect(() => {
         const localSettings = localStorage.getItem('settings');
@@ -34,7 +33,12 @@ const Home = () => {
 
     return (
         <main>
+            <Head>
+                <title>{title}</title>
+            </Head>
+
             <Navigation
+                onChange={key => setTitle(key.displayName)}
                 defaultKeyId={settings.defaultTab}
                 keys={[
                     { id: 'clock', displayName: 'Clock', iconClass: 'clock' },
@@ -61,13 +65,17 @@ const Home = () => {
                 ]}>
                 <NavPanel keyId='clock'>
                     <Clock
-                        settings={{ use24HourFormat: settings.use24 }}></Clock>
+                        settings={{
+                            use24HourFormat: settings.use24
+                        }}></Clock>
                 </NavPanel>
 
                 <NavPanel keyId='stopwatch'>
                     <Stopwatch />
                 </NavPanel>
-                <NavPanel keyId='timer'>Timer</NavPanel>
+                <NavPanel keyId='timer'>
+                    <Timer />
+                </NavPanel>
                 <NavPanel keyId='alarms'>Alarms</NavPanel>
                 <NavPanel keyId='settings'>
                     <SettingsPanel
