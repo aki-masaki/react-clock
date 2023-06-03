@@ -16,7 +16,7 @@ const Clock = ({ settings }: { settings: { use24HourFormat: boolean } }) => {
     return (
         <>
             {!!timeData ? (
-                <span className={`${styles.clock} ${pt_mono.className}`}>
+                <span className={`${styles.time} ${pt_mono.className}`}>
                     {Time.formatTimeData(timeData, {
                         use24HourFormat: settings.use24HourFormat
                     })}

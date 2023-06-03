@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import './globals.css';
-import { Montserrat_Alternates } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 
-const montserrat = Montserrat_Alternates({ weight: '400', subsets: ['latin'] });
+const montserrat = Montserrat({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Clock',

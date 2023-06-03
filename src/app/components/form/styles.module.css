@@ -55,3 +55,22 @@
 .option.active .active-indicator {
     background-color: var(--primary-color);
 }
+
+.button {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    min-width: 100px;
+    text-align: center;
+    user-select: none;
+}
+
+.button.primary {
+    background-color: var(--primary-color);
+    color: black;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}

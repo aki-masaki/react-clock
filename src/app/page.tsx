@@ -5,6 +5,7 @@ import Navigation from './components/navigation/navigation';
 import NavPanel from './components/navigation/navpanel';
 import Clock from './components/panels/clock';
 import SettingsPanel, { Settings } from './components/panels/settings-panel';
+import Stopwatch from './components/panels/stopwatch';
 
 const Home = () => {
     const [settings, setSettings] = useState<Settings>((() => {
@@ -63,7 +64,9 @@ const Home = () => {
                         settings={{ use24HourFormat: settings.use24 }}></Clock>
                 </NavPanel>
 
-                <NavPanel keyId='stopwatch'>Stopwatch</NavPanel>
+                <NavPanel keyId='stopwatch'>
+                    <Stopwatch />
+                </NavPanel>
                 <NavPanel keyId='timer'>Timer</NavPanel>
                 <NavPanel keyId='alarms'>Alarms</NavPanel>
                 <NavPanel keyId='settings'>

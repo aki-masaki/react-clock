@@ -32,8 +32,8 @@ export class Time {
      * @param filter The requested data (seconds, minutes and hours)
      * @returns The timedata object
      */
-    public static getTime(filter?: TimeFilter): TimeData {
-        const date = this.getDate();
+    public static getTime(filter?: TimeFilter, date?: Date): TimeData {
+        date ||= this.getDate();
 
         if (filter) {
             let object: TimeData = { hours: 0 };
@@ -130,18 +130,6 @@ export class Time {
 
         let period: 'PM' | 'AM' | '' = '';
 
-        /**
-         * Adds zero in front if number is < 10
-         * @param item The number to format (seconds, minutes, hours)
-         */
-        const formatItem = (item: number): string => {
-            return item === 0
-                ? '00'
-                : item >= 10
-                ? String(item)
-                : '0' + String(item);
-        };
-
         if (!use24HourFormat) {
             if (timeData.hours - 12 > 0) {
                 timeData.hours -= 12;
@@ -149,16 +137,29 @@ export class Time {
             } else period = 'AM';
         }
 
-        if (filter?.hours) formatted += formatItem(timeData.hours as number);
+        if (filter?.hours)
+            formatted += this.formatItem(timeData.hours as number);
 
         if (filter?.minutes)
-            formatted += `:${formatItem(timeData.minutes as number)}`;
+            formatted += `:${this.formatItem(timeData.minutes as number)}`;
 
         if (filter?.seconds)
-            formatted += `:${formatItem(timeData.seconds as number)}`;
+            formatted += `:${this.formatItem(timeData.seconds as number)}`;
 
         formatted += ' ' + period;
 
         return formatted;
     }
+
+    /**
+     * Adds zero in front if number is < 10
+     * @param item The number to format (seconds, minutes, hours)
+     */
+    public static formatItem = (item: number): string => {
+        return item === 0
+            ? '00'
+            : item >= 10
+            ? String(item)
+            : '0' + String(item);
+    };
 }
