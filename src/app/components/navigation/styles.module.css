@@ -23,6 +23,14 @@
     color: var(--primary-color);
 }
 
-.navbar-item > i {
+.navbar-item>i {
     font-size: 1.5em;
+}
+
+.nav-panel {
+    flex-grow: 2;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -8,7 +8,11 @@ const NavPanel = ({
     keyId: string;
     children?: React.ReactNode;
 }) => {
-    return <div key={keyId}>{children}</div>;
+    return (
+        <div key={keyId} className={styles['nav-panel']}>
+            {children}
+        </div>
+    );
 };
 
 export default NavPanel;

@@ -1,6 +1,7 @@
 import Navigation from './components/navigation/navigation';
 import NavPanel from './components/navigation/navpanel';
 import Clock from './components/panels/clock';
+import Settings from './components/panels/settings';
 
 const Home = () => {
     return (
@@ -22,14 +23,23 @@ const Home = () => {
                         id: 'alarms',
                         displayName: 'Alarms',
                         iconClass: 'alarm'
+                    },
+                    {
+                        id: 'settings',
+                        displayName: 'Settings',
+                        iconClass: 'gear'
                     }
                 ]}>
                 <NavPanel keyId='clock'>
-                    <Clock></Clock>
+                    <Clock settings={{ use24HourFormat: false }}></Clock>
                 </NavPanel>
+
                 <NavPanel keyId='stopwatch'>Stopwatch</NavPanel>
                 <NavPanel keyId='timer'>Timer</NavPanel>
                 <NavPanel keyId='alarms'>Alarms</NavPanel>
+                <NavPanel keyId='settings'>
+                    <Settings />
+                </NavPanel>
             </Navigation>
         </main>
     );

@@ -1,10 +1,14 @@
 export interface TimeFilter {
     seconds?: boolean;
     minutes?: boolean;
-    hours?: boolean;
+    hours: boolean;
 }
 
-export type TimeData = { [key in keyof TimeFilter]?: number };
+export type TimeData = {
+    seconds?: number;
+    minutes?: number;
+    hours: number;
+};
 
 // The intervals in miliseconds
 export const SECONDS_INTERVAL = 10 ** 3,
@@ -32,7 +36,7 @@ export class Time {
         const date = this.getDate();
 
         if (filter) {
-            let object: TimeData = {};
+            let object: TimeData = { hours: 0 };
 
             if (filter.seconds) object['seconds'] = date.getSeconds();
             if (filter.minutes) object['minutes'] = date.getMinutes();
@@ -52,7 +56,12 @@ export class Time {
      * Subscribe to an event which fires every second
      * @param callback
      */
-    public static onSecondsUpdate(callback: (time: TimeData) => any) {
+    public static onSecondsUpdate(
+        callback: (time: TimeData) => any,
+        writeImmediately: boolean = false
+    ) {
+        if (writeImmediately) callback(this.getTime());
+
         setTimeout(() => {
             setInterval(() => callback(this.getTime()), SECONDS_INTERVAL);
         }, 1000 - new Date().getMilliseconds());
@@ -62,7 +71,12 @@ export class Time {
      * Subscribe to an event which fires every minute
      * @param callback
      */
-    public static onMinuteUpdate(callback: (time: TimeData) => any) {
+    public static onMinuteUpdate(
+        callback: (time: TimeData) => any,
+        writeImmediately: boolean = false
+    ) {
+        if (writeImmediately) callback(this.getTime());
+
         setTimeout(() => {
             setInterval(() => callback(this.getTime()), MINUTES_INTERVAL);
 
@@ -75,7 +89,12 @@ export class Time {
      * Subscribe to an event which fires every hour
      * @param callback
      */
-    public static onHourUpdate(callback: (time: TimeData) => any) {
+    public static onHourUpdate(
+        callback: (time: TimeData) => any,
+        writeImmediately: boolean = false
+    ) {
+        if (writeImmediately) callback(this.getTime());
+
         setTimeout(() => {
             setInterval(() => callback(this.getTime()), HOURS_INTERVAL);
 
@@ -89,14 +108,56 @@ export class Time {
      * @param timeData The timeData to format
      * @returns The formatted time e.g. 07:47:00
      */
-    public static formatTimeData(timeData: TimeData) {
+    public static formatTimeData(
+        timeData: TimeData,
+        {
+            filter,
+            use24HourFormat
+        }: {
+            filter?: TimeFilter;
+            use24HourFormat: boolean;
+        }
+    ) {
         let formatted = '';
 
-        if (timeData.hours) formatted += timeData.hours;
+        timeData = timeData;
 
-        if (timeData.minutes) formatted += `:${timeData.minutes}`;
+        filter ||= {
+            seconds: true,
+            minutes: true,
+            hours: true
+        };
 
-        if (timeData.seconds) formatted += `:${timeData.seconds}`;
+        let period: 'PM' | 'AM' | '' = '';
+
+        /**
+         * Adds zero in front if number is < 10
+         * @param item The number to format (seconds, minutes, hours)
+         */
+        const formatItem = (item: number): string => {
+            return item === 0
+                ? '00'
+                : item >= 10
+                ? String(item)
+                : '0' + String(item);
+        };
+
+        if (!use24HourFormat) {
+            if (timeData.hours - 12 > 0) {
+                timeData.hours -= 12;
+                period = 'PM';
+            } else period = 'AM';
+        }
+
+        if (filter?.hours) formatted += formatItem(timeData.hours as number);
+
+        if (filter?.minutes)
+            formatted += `:${formatItem(timeData.minutes as number)}`;
+
+        if (filter?.seconds)
+            formatted += `:${formatItem(timeData.seconds as number)}`;
+
+        formatted += ' ' + period;
 
         return formatted;
     }
