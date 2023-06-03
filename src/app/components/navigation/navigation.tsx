@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import NavBar from './navbar';
-import NavPanel from './navpanel';
 
 export interface NavigationKey {
     id: string;
@@ -12,12 +11,14 @@ export interface NavigationKey {
 
 const Navigation = ({
     children,
-    keys
+    keys,
+    defaultKeyId
 }: {
     keys: NavigationKey[];
     children: React.ReactNode;
+    defaultKeyId: string;
 }) => {
-    const [activeKeyId, setActiveKeyId] = useState<string>(keys[0].id);
+    const [activeKeyId, setActiveKeyId] = useState<string>(defaultKeyId);
 
     return (
         <>
@@ -28,7 +29,7 @@ const Navigation = ({
 
             {(React.Children.toArray(children) as React.ReactElement[]).find(
                 child => {
-                    return child.key === `.$${activeKeyId}`;
+                    return child.props.keyId === `${activeKeyId}`;
                 }
             )}
         </>

@@ -1,0 +1,57 @@
+.checkbox {
+    width: 100%;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.checkbox.checked {
+    color: var(--primary-color);
+}
+
+.checkbox.checked .active-indicator {
+    background-color: var(--primary-color);
+}
+
+.active-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: var(--secondary-color);
+    transition: .4s;
+}
+
+.label {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.select {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+.option {
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 50px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option.active {
+    color: var(--primary-color);
+}
+
+.option.active .active-indicator {
+    background-color: var(--primary-color);
+}
