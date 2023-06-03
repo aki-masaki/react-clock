@@ -3,11 +3,13 @@
 ## Features:
 
 -   Clock
-    ![Clock Screenshot](/assets/clock.png)
+    ![Clock Screenshot](assets/clock_screenshot.png)
 -   Stopwatch
-    ![Stopwatch Screenshot](/assets/stopwatch.png)
-
-## More coming soon
+    ![Stopwatch Screenshot](assets/stopwatch_screennshot.png)
+-   Timer
+    ![Timer Screenshot](assets/timer_screenshot.png)
+-   Settings
+    ![Settings Screenshot](assets/settings_screenshot.png)
 
 # Credits
 

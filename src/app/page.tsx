@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Navigation from './components/navigation/navigation';
-import NavPanel from './components/navigation/navpanel';
-import Clock from './components/panels/clock';
-import SettingsPanel, { Settings } from './components/panels/settings-panel';
-import Stopwatch from './components/panels/stopwatch';
-import Timer from './components/panels/timer';
+import { Navigation, NavPanel } from './components/navigation';
+import {
+    Clock,
+    Stopwatch,
+    Timer,
+    SettingsPanel,
+    Settings
+} from './components/panels';
 import Head from 'next/head';
 
 const Home = () => {
@@ -53,11 +55,6 @@ const Home = () => {
                         iconClass: 'hourglass'
                     },
                     {
-                        id: 'alarms',
-                        displayName: 'Alarms',
-                        iconClass: 'alarm'
-                    },
-                    {
                         id: 'settings',
                         displayName: 'Settings',
                         iconClass: 'gear'
@@ -76,7 +73,6 @@ const Home = () => {
                 <NavPanel keyId='timer'>
                     <Timer />
                 </NavPanel>
-                <NavPanel keyId='alarms'>Alarms</NavPanel>
                 <NavPanel keyId='settings'>
                     <SettingsPanel
                         settings={settings}

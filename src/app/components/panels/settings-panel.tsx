@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
-import { CheckBox } from '../form/check-box';
-import { Label } from '../form/label';
-import { Select } from '../form/select';
+import formStyles from '../form/styles.module.css';
+import { CheckBox, Select, Label, Link } from '../form';
 
 export interface Settings {
     use24: boolean;
@@ -43,16 +42,27 @@ const SettingsPanel = ({
                     {
                         id: 'timer',
                         label: 'Timer'
-                    },
-                    {
-                        id: 'alarms',
-                        label: 'Alarms'
                     }
                 ]}
                 onChange={(id, activeOptionId) =>
                     onSettingChange(id, activeOptionId)
                 }
                 defaultValue={settings.defaultTab}
+            />
+            <Label text='React Clock' big />
+            <Label text='This is a clock built in next.js and react' />
+            <Label text='Icons from Bootstrap Icons' />
+            <Link
+                href='https://icons.getbootstrap.com/'
+                label='Bootstrap Icons'
+            />
+            <Label text='Fonts from Google Fonts [Montserrat and PT_mono]' />
+            <Link href='https://fonts.google.com/' label='Google Fonts' />
+
+            <Link
+                href='https://github.com/NikiStefan2/react-clock'
+                label='Github'
+                id={formStyles['github-link']}
             />
         </div>
     );

@@ -1,5 +1,22 @@
 import styles from './styles.module.css';
 
-export const Label = ({ text }: { text: string }) => {
-    return <span className={styles.label}>{text}</span>;
+const Label = ({
+    text,
+    big = false,
+    secondary = false
+}: {
+    text: string;
+    big?: boolean;
+    secondary?: boolean;
+}) => {
+    return (
+        <span
+            className={`${styles.label} ${big && styles.big} ${
+                secondary && styles.secondary
+            }`}>
+            {text}
+        </span>
+    );
 };
+
+export default Label;

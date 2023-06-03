@@ -44,5 +44,5 @@ const Select = ({
     );
 };
 
-export { Select };
+export default Select;
 export type { Option };

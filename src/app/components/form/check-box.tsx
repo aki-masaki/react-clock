@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
-export const CheckBox = ({
+const CheckBox = ({
     defaultValue = false,
     onChange,
     label,
@@ -27,3 +27,5 @@ export const CheckBox = ({
         </div>
     );
 };
+
+export default CheckBox;

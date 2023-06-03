@@ -30,6 +30,14 @@
     font-size: 1.2em;
 }
 
+.label.secondary {
+    color: gray;
+}
+
+.label.big {
+    font-size: 1.7em;
+}
+
 .select {
     width: 100%;
     display: flex;
@@ -79,4 +87,25 @@
     display: flex;
     gap: 10px;
     min-width: 100px;
+}
+
+.link {
+    width: 100%;
+    background-color: var(--background-color);
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-color);
+}
+
+.link>.active-indicator {
+    background-color: var(--primary-color);
+}
+
+#github-link {
+    margin-top: auto;
 }
