@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import NavBar from './navbar';
+import { useShortcutMap } from '../../useShortcut';
 
 export interface NavigationKey {
     id: string;
@@ -21,6 +22,12 @@ const Navigation = ({
     onChange?(key: NavigationKey): any;
 }) => {
     const [activeKeyId, setActiveKeyId] = useState<string>(defaultKeyId);
+
+    const handleShortcuts = (key: string) => {
+        setActiveKeyId(keys[Number(key) - 1].id);
+    };
+
+    useShortcutMap(['1', '2', '3', '4'], handleShortcuts);
 
     useEffect(
         () =>

@@ -3,12 +3,21 @@ import { PT_Mono } from 'next/font/google';
 import styles from './styles.module.css';
 import { Time } from '@/app/time';
 import Button, { Buttons } from '../form/button';
+import { useShortcut } from '@/app/useShortcut';
 
 const pt_mono = PT_Mono({ weight: '400', subsets: ['latin'] });
 
 const Stopwatch = ({}: {}) => {
     const [miliseconds, setMiliseconds] = useState(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
+
+    const reset = () => {
+        setIsRunning(false);
+        setMiliseconds(0);
+    };
+
+    useShortcut(' ', () => setIsRunning(!isRunning));
+    useShortcut('r', reset);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -41,13 +50,7 @@ const Stopwatch = ({}: {}) => {
                     onClick={() => setIsRunning(true)}
                 />
                 <Button label='Stop' onClick={() => setIsRunning(false)} />
-                <Button
-                    label='Reset'
-                    onClick={() => {
-                        setIsRunning(false);
-                        setMiliseconds(0);
-                    }}
-                />
+                <Button label='Reset' onClick={reset} />
             </Buttons>
         </>
     );

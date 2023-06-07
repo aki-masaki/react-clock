@@ -11,7 +11,13 @@
 -   Settings
     ![Settings Screenshot](assets/settings_screenshot.png)
 
-# Credits
+## Shortcuts
+
+-   Toggle: space
+-   Reset: r
+-   Navigate: 1 to 4
+
+## Credits
 
 Icons - Bootstrap Icons (https://icons.getbootstrap.com/)
 
